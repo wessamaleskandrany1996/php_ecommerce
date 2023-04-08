@@ -13,7 +13,7 @@ include('../middLeware/adminMiddleware.php');
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>ID</th>
                                 <th>NAME</th>
                                 <th>IMAGE</th>
@@ -33,9 +33,13 @@ include('../middLeware/adminMiddleware.php');
                                                 <td>
                                                     <img src="../uploads/<?= $item['image']; ?>" width="50px" height="50px" alt="<?= $item['name']; ?>">
                                                 </td>
-                                                <td><?= $item['status'] == '0'?"visible":"hidden"; ?></td>
+                                                <td><?= $item['status'] == '1'?"visible":"hidden"; ?></td>
                                                 <td>
-                                                    <a href="#" class="btn btn-primary">Edit</a>
+                                                    <a href="editcategory.php?id=<?= $item['id']; ?>" class="btn btn-primary">Edit</a>
+                                                    <form action="code.php" method="POST">
+                                                        <input type="hidden" name="category_id" value="<?= $item['id'] ?>" >
+                                                        <button type="submit" class=" btn btn-danger" name="delete_category_btn">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         <?php
@@ -51,3 +55,4 @@ include('../middLeware/adminMiddleware.php');
         </div>
     </div>
 </div>
+<?php include('includes/footer.php'); ?>
