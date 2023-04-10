@@ -1,7 +1,6 @@
 <?php 
- session_start();
-include('includes/header.php'); 
 include('../middLeware/adminMiddleware.php');
+include('includes/header.php'); 
 ?>
 
 <div class="container">
@@ -40,10 +39,7 @@ include('../middLeware/adminMiddleware.php');
                                                     <a href="editproduct.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <form action="code.php" method="POST">
-                                                        <input type="hidden" name="product_id" value="<?= $item['id'] ?>" >
-                                                        <button type="submit" class=" btn btn-sm btn-danger" name="delete_product_btn">Delete</button>
-                                                    </form>
+                                                    <button type="button" class=" btn btn-sm btn-danger delete_product_btn" value="<?= $item['id']; ?>">Delete</button>
                                                 </td>
                                             </tr>
                                         <?php

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('../config/dbcon.php');
 include('../functions/myfunctions.php');
 
@@ -74,9 +73,11 @@ else if (isset($_POST['delete_category_btn'])) {
         if (file_exists("../uploads/".$image)) {
             unlink("../uploads/".$image);
         }
-        redirect("category.php","Category Deleted Successfully");
+        // redirect("category.php","Category Deleted Successfully");
+        echo 200;
     }else{
-        redirect("category.php","Something Went Wrong");
+        // redirect("category.php","Something Went Wrong");
+        echo 500;
     }
 }
 else if (isset($_POST['add_product_btn'])) {
@@ -115,7 +116,23 @@ else if (isset($_POST['add_product_btn'])) {
     }
 }
 else if (isset($_POST['delete_product_btn'])) {
-    
+    $product_id = mysqli_real_escape_string($con, $_POST['product_id']);
+    $product_query = "SELECT * FROM products WHERE id='$product_id' ";
+    $product_query_run = mysqli_query($con, $product_query);
+    $product_data = mysqli_fetch_array($product_query_run);
+    $image = $product_data['image'];
+    $delete_query = "DELETE FROM products WHERE id='$product_id' ";
+    $delete_query_run = mysqli_query($con, $delete_query);
+    if ($delete_query_run) {
+        if (file_exists("../uploads/".$image)) {
+            unlink("../uploads/".$image);
+        }
+        // redirect("products.php","product Deleted Successfully");
+        echo 200;
+    }else{
+        // redirect("products.php","Something Went Wrong");
+        echo 500;
+    }
 }
 else if (isset($_POST['update_product_btn'])) {
     $product_id = $_POST['product_id'];

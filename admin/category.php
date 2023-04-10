@@ -1,7 +1,7 @@
 <?php 
- session_start();
-include('includes/header.php'); 
 include('../middLeware/adminMiddleware.php');
+include('includes/header.php'); 
+
 ?>
 <div class="container">
     <div class="row">
@@ -39,10 +39,7 @@ include('../middLeware/adminMiddleware.php');
                                                     <a href="editcategory.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <form action="code.php" method="POST">
-                                                        <input type="hidden" name="category_id" value="<?= $item['id'] ?>" >
-                                                        <button type="submit" class=" btn btn-sm btn-danger" name="delete_category_btn">Delete</button>
-                                                    </form>
+                                                    <button type="button" class=" btn btn-sm btn-danger delete_category_btn" value="<?= $item['id']; ?>">Delete</button>
                                                 </td>
                                             </tr>
                                         <?php

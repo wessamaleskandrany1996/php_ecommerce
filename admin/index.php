@@ -1,7 +1,6 @@
 <?php 
- session_start();
-include('includes/header.php'); 
-include('../middLeware/adminMiddleware.php');
+ include('../middLeware/adminMiddleware.php');
+ include('includes/header.php'); 
 ?>
 <div class="py-5">
     <div class="container">
