@@ -3,12 +3,13 @@
 include('includes/header.php'); 
 include('../middLeware/adminMiddleware.php');
 ?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Categories</h4>
+                    <h4>Products</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
@@ -24,9 +25,9 @@ include('../middLeware/adminMiddleware.php');
                         </thead>
                         <tbody>
                             <?php 
-                                $category = getAll("categories");
-                                if (mysqli_num_rows($category) > 0 ) {
-                                    foreach($category as $item){
+                                $products = getAll("products");
+                                if (mysqli_num_rows($products) > 0 ) {
+                                    foreach($products as $item){
                                         ?>
                                             <tr class="text-center">
                                                 <td><?= $item['id']; ?></td>
@@ -36,12 +37,12 @@ include('../middLeware/adminMiddleware.php');
                                                 </td>
                                                 <td><?= $item['status'] == '1'?"visible":"hidden"; ?></td>
                                                 <td>
-                                                    <a href="editcategory.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                    <a href="editproduct.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
                                                 </td>
                                                 <td>
                                                     <form action="code.php" method="POST">
-                                                        <input type="hidden" name="category_id" value="<?= $item['id'] ?>" >
-                                                        <button type="submit" class=" btn btn-sm btn-danger" name="delete_category_btn">Delete</button>
+                                                        <input type="hidden" name="product_id" value="<?= $item['id'] ?>" >
+                                                        <button type="submit" class=" btn btn-sm btn-danger" name="delete_product_btn">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -58,4 +59,5 @@ include('../middLeware/adminMiddleware.php');
         </div>
     </div>
 </div>
+
 <?php include('includes/footer.php'); ?>

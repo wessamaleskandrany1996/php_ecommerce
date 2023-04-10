@@ -2,6 +2,7 @@
 session_start();
 include('../config/dbcon.php');
 include('../functions/myfunctions.php');
+
 if (isset($_POST['add_category_btn'])) {
     $name = $_POST['name'];
     $slug = $_POST['slug'];
@@ -23,9 +24,8 @@ if (isset($_POST['add_category_btn'])) {
     }else{
         redirect("addcategory.php","something went wrong");
     }
-};
-
-if (isset($_POST['update_category_btn'])) {
+}
+else if (isset($_POST['update_category_btn'])) {
     $cat_id = $_POST['category_id'];
     $name = $_POST['name'];
     $slug = $_POST['slug'];
@@ -61,9 +61,8 @@ if (isset($_POST['update_category_btn'])) {
         redirect("editcategory.php?id=$cat_id","Something Went Wrong");
     }
 
-};
-
-if (isset($_POST['delete_category_btn'])) {
+}
+else if (isset($_POST['delete_category_btn'])) {
     $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
     $category_query = "SELECT * FROM categories WHERE id='$category_id' ";
     $category_query_run = mysqli_query($con, $category_query);
@@ -79,4 +78,88 @@ if (isset($_POST['delete_category_btn'])) {
     }else{
         redirect("category.php","Something Went Wrong");
     }
+}
+else if (isset($_POST['add_product_btn'])) {
+    $category_id = $_POST['category_id'];
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $small_description = $_POST['small_description'];
+    $description = $_POST['description'];
+    $original_price = $_POST['original_price'];
+    $selling_price = $_POST['selling_price'];
+    $qty = $_POST['qty'];
+    $meta_title = $_POST['meta_title'];
+    $meta_description = $_POST['meta_description'];
+    $meta_keywords = $_POST['meta_keyword'];
+    $status = isset($_POST['status']) ? '1' : '0';
+    $trending = isset($_POST['trending']) ? '1' : '0';
+    $image = $_FILES['image']['name'];
+    $path = "../uploads";
+    $image_ext = pathinfo($image, PATHINFO_EXTENSION);
+    $filename = time().'.'.$image_ext;
+
+    if ($name != "" && $name != "" && $slug != "" && $meta_description != "" && $meta_keywords != "" && $meta_title != "" && $selling_price != "" && $original_price != "" && $small_description != "" && $description != "") {
+        $product_query = "INSERT INTO products (category_id,name,slug,small_description,original_price,selling_price,qty,meta_title,description,meta_description,meta_keywords,status,trending,image) VALUES ('$category_id','$name','$slug','$small_description','$original_price','$selling_price','$qty','$meta_title','$description','$meta_description','$meta_keywords','$status','$trending','$filename')";
+        $product_query_run = mysqli_query($con, $product_query);
+
+            if ($product_query_run) {
+                move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$filename);
+                redirect("addproduct.php","Product Added Successfully");
+            }else{
+                redirect("addproduct.php","something went wrong");
+            }
+    }
+    else
+    {
+        redirect("addproduct.php","All Fields Required");
+    }
+}
+else if (isset($_POST['delete_product_btn'])) {
+    
+}
+else if (isset($_POST['update_product_btn'])) {
+    $product_id = $_POST['product_id'];
+    $category_id = $_POST['category_id'];
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $meta_title = $_POST['meta_title'];
+    $description = $_POST['description'];
+    $meta_description = $_POST['meta_description'];
+    $small_description = $_POST['small_description'];
+    $qty = $_POST['qty'];
+    $original_price = $_POST['original_price'];
+    $selling_price = $_POST['selling_price'];
+    $meta_keywords = $_POST['meta_keyword'];
+    $status = isset($_POST['status']) ? '1' : '0';
+    $trending = isset($_POST['trending']) ? '1' : '0';
+    $new_image = $_FILES['image']['name'];
+    $old_image = $_POST['old_image'];
+    $path = "../uploads";
+    
+    if ($new_image !="") {
+        $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
+        $update_filename = time().'.'.$image_ext;
+    }else{
+        $update_filename = $old_image ;
+    }
+
+    $update_query = "UPDATE products SET category_id='$category_id',name='$name',slug='$slug',meta_title='$meta_title',original_price='$original_price',selling_price='$selling_price',small_description='$small_description',qty='$qty',description='$description',meta_description='$meta_description',meta_keywords='$meta_keywords',status='$status',trending='$trending',image='$update_filename' WHERE id='$product_id' ";
+    $update_query_run = mysqli_query($con, $update_query);
+
+    if ($update_query_run) {
+        if ($_FILES['image']['name'] != "") {
+            move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$update_filename);
+            if (file_exists("../uploads/".$old_image)) {
+                unlink("../uploads/".$old_image);
+            }
+        }
+        redirect("editproduct.php?id=$product_id","Product updated Successfully");
+    }else{
+        redirect("editproduct.php?id=$product_id","Something Went Wrong");
+    }
+
+}
+else
+{
+    header('location: ../index.php');
 }
