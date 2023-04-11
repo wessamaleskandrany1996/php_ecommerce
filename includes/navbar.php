@@ -12,7 +12,7 @@
           <a style="color:#2ab8ec" class="nav-link a"  aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a style="color:#2ab8ec" class="nav-link" href="#">Features</a>
+          <a style="color:#2ab8ec" class="nav-link" href="categories.php">Categories</a>
         </li>
         <?php if (isset($_SESSION['auth'])) 
         {
