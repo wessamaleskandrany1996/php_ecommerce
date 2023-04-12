@@ -31,11 +31,12 @@
                                 foreach($products as $item){
                                     ?>
                                         <div class="col-md-3 mb-3">
-                                            <a href="#" style="text-decoration: none;">
+                                            <a href="productview.php?product=<?= $item['slug'] ?>" style="text-decoration: none;">
                                                 <div class="card shadow">
                                                     <div class="card-body">
-                                                        <img src="uploads/<?= $item['image'] ?>" alt="product image" class="w-100">
-                                                    <h4 class="text-center"><?= $item['name'] ?></h4> 
+                                                        <img src="uploads/<?= $item['image'] ?>" height="250px" alt="product image" class="w-100">
+                                                        <hr>
+                                                        <h4 class="text-center"><?= $item['name'] ?></h4> 
                                                     </div>
                                                 </div>
                                             </a>

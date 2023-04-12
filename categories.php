@@ -26,7 +26,7 @@
                                     <a href="products.php?category=<?= $item['slug'] ?>" style="text-decoration: none;">
                                         <div class="card shadow">
                                             <div class="card-body">
-                                                <img src="uploads/<?= $item['image'] ?>" alt="category image" class="w-100">
+                                                <img src="uploads/<?= $item['image'] ?>" alt="category image" height="200px" class="w-100">
                                             <h4 class="text-center"><?= $item['name'] ?></h4> 
                                             </div>
                                         </div>
