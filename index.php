@@ -1,14 +1,13 @@
 <?php 
     session_start();
-    include("includes/header.php");
-    
+    include("includes/header.php"); 
 ?>
 
 <div class="py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <h1>Hello, world!</h1>
+                <h1>Hello, world! <i class="fa fa-user"></i></h1>
                 <button class="btn btn-primary">testing</button>
                 <?php if (isset($_SESSION['message'])) { ?>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
