@@ -14,6 +14,9 @@
         <li class="nav-item">
           <a style="color:#2ab8ec" class="nav-link" href="categories.php">Categories</a>
         </li>
+        <li class="nav-item">
+          <a style="color:#2ab8ec" class="nav-link" href="cart.php">Cart</a>
+        </li>
         <?php if (isset($_SESSION['auth'])) 
         {
            ?>
